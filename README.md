@@ -2,11 +2,19 @@
 The first step to becoming rich
 
 # Auto generate mybatis code and relates controller,domain and service
+
+
+
 ## Configuration mysql
 ### application.yml
 fixed the datasource.url to your database
+
+
 ## call the controller GeneratorController
 ### generatorAll means generate all the table from the database you configure
+
+
+
 
 ## generator file store in
 ### Controller in Controller dir
@@ -20,6 +28,8 @@ fixed the datasource.url to your database
 ### db service query function implement in Service.Implement
 
 ### related mappers in resources.mappers
+
+
 
 
 ## Attentions!!
