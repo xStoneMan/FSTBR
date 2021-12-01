@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### No use cache data ###
+**/src/main/**/resources/templates/templates
+**/src/main/**/resources/static

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fstbr.demo.Dao.SalariesDao">
+
+	<select id="get" resultType="com.fstbr.demo.Domain.Model.Salaries">
+		select `emp_no`,`salary`,`from_date`,`to_date` from salaries where emp_no = #{value}
+	</select>
+
+	<select id="list" resultType="com.fstbr.demo.Domain.Model.Salaries">
+		select `emp_no`,`salary`,`from_date`,`to_date` from salaries
+        <where>  
+		  		  <if test="empNo != null and empNo != ''"> and emp_no = #{empNo} </if>
+		  		  <if test="salary != null and salary != ''"> and salary = #{salary} </if>
+		  		  <if test="fromDate != null and fromDate != ''"> and from_date = #{fromDate} </if>
+		  		  <if test="toDate != null and toDate != ''"> and to_date = #{toDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by emp_no desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from salaries
+		 <where>  
+		  		  <if test="empNo != null and empNo != ''"> and emp_no = #{empNo} </if>
+		  		  <if test="salary != null and salary != ''"> and salary = #{salary} </if>
+		  		  <if test="fromDate != null and fromDate != ''"> and from_date = #{fromDate} </if>
+		  		  <if test="toDate != null and toDate != ''"> and to_date = #{toDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.fstbr.demo.Domain.Model.Salaries">
+		insert into salaries
+		(
+			`emp_no`, 
+			`salary`, 
+			`from_date`, 
+			`to_date`
+		)
+		values
+		(
+			#{empNo}, 
+			#{salary}, 
+			#{fromDate}, 
+			#{toDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.fstbr.demo.Domain.Model.Salaries">
+		update salaries 
+		<set>
+			<if test="salary != null">`salary` = #{salary}, </if>
+			<if test="fromDate != null">`from_date` = #{fromDate}, </if>
+			<if test="toDate != null">`to_date` = #{toDate}</if>
+		</set>
+		where emp_no = #{empNo}
+	</update>
+	
+	<delete id="remove">
+		delete from salaries where emp_no = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from salaries where emp_no in 
+		<foreach item="empNo" collection="array" open="(" separator="," close=")">
+			#{empNo}
+		</foreach>
+	</delete>
+
+</mapper>
