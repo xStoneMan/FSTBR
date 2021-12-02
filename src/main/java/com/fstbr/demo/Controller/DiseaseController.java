@@ -1,11 +1,14 @@
 package com.fstbr.demo.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fstbr.demo.Domain.Dto.BaseListDto;
 import com.fstbr.demo.Entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.fstbr.demo.Domain.Model.Disease;
@@ -34,9 +37,11 @@ public class DiseaseController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	public PageUtils list(@Validated BaseListDto baseListDto){
 		//查询列表数据
-        Query query = new Query(params);
+        Map<String, Object> query = new HashMap<>();
+        query.put("offset", baseListDto.getPage() * baseListDto.getPageSize());
+        query.put("limit", baseListDto.getPageSize());
 		List<Disease> diseaseList = diseaseService.list(query);
 		int total = diseaseService.count(query);
 		PageUtils pageUtils = new PageUtils(diseaseList, total);
