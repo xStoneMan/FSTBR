@@ -22,26 +22,4 @@ public class Constant {
 
     //用户状态常量
     public  static final  int USER_STATUS = 1;//有效
-
-    //公司名称
-    public static final String COMPANY_NAME = "FRScan";
-    public static final String STATUS_CODE = "200";
-
-    /*****
-     * FR相关配置
-     * ********/
-    //check_in check_out
-    public static final String REQUEST_SUCCESS = "0";//下发请求成功
-    public static final int MANAGER_STAFF = 1;
-    public static final int VISITORS = 2;
-    //请求safeEntry接口地址
-    public static final  String SAFEENTRY_URL = "http://localhost:9090/api/login/";
-    //safeEntry请求失败,错误信息定义
-    public static final String ERROR_CODE = "100";
-    public static final String ERROR_MSG = "错误..";
-
-    public static final String ISSUE_URL = "8090/basic/Employee/syncEmp";//人员下发
-    public static final String DELETE_EMP_URL = "8090/basic/Employee/delEmp";//删除人员
-
-    public static final Long maxSize = 10*1024l;//图片上传最大量
 }
